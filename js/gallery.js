@@ -2,6 +2,7 @@
   // Caption
   $('.entry').each(function(i){
     $(this).find('img').each(function(){
+<<<<<<< HEAD
       var alt = this.alt;
 
       if (alt){
@@ -9,6 +10,17 @@
       }
 
       $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery' + i + '" />');
+=======
+      if (!$(this).hasClass('nofancybox')){
+        var alt = this.alt;
+
+        if (alt){
+          $(this).after('<span class="caption">' + alt + '</span>');
+        }
+
+        $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery' + i + '" />');
+      }
+>>>>>>> 5adac5af1cc3fb8e4adc8cc9f08392efc886fa08
     });
   });
 
@@ -62,4 +74,8 @@
       }
     });
   });
+<<<<<<< HEAD
 })(jQuery);
+=======
+})(jQuery);
+>>>>>>> 5adac5af1cc3fb8e4adc8cc9f08392efc886fa08
