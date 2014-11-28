@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mac | moritam.github.io</title>
+  <meta name="author" content="Hayato Moritan">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="moritam.github.io"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="moritam.github.io" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">moritam.github.io</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">mac</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-25T11:43:52.000Z"><a href="/2014/11/25/MacでコマンドラインからのVPN接続/">Nov 25 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/25/MacでコマンドラインからのVPN接続/">MacでコマンドラインからのVPN接続</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>仕事上VPN接続をすることが多く、その度にマウスなりトラックパッドでメニューバーから選択するのが億劫だったのでコマンドラインからVPN接続できないかずっと探していたけど<br>（VPN接続-&gt;サーバ接続してターミナル作業が殆どなので）<br>なかなか見つからずその度に諦めていました。</p>
+<p>下記のように networksetup コマンドを使う方法があったけど</p>
+<p><a href="https://chrome.google.com/webstore/search/keyconfig" target="_blank" rel="external">https://chrome.google.com/webstore/search/keyconfig</a></p>
+<p>接続</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>networksetup -connectpppoeservic [<span class="constant">VPN</span>サービス名]</div></pre></td></tr></table></figure>
+
+<p>はできても切断</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>networksetup -disconnectpppoeservic [<span class="constant">VPN</span>サービス名]</div></pre></td></tr></table></figure>
+
+<p>がどうもできない。</p>
+<p>行き着いた答えが以下に。</p>
+<p><a href="http://superuser.com/questions/358513/start-configured-vpn-from-command-line-osx" target="_blank" rel="external">http://superuser.com/questions/358513/start-configured-vpn-from-command-line-osx</a></p>
+<p>scutilというコマンドを使うらしい。</p>
+<ul>
+<li>接続</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">$</span> <span class="comment">scutil</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">nc</span> <span class="comment">start</span> <span class="comment">Foo</span></div></pre></td></tr></table></figure>
+
+<ul>
+<li>切断</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scutil --nc <span class="keyword">stop</span> Foo</div></pre></td></tr></table></figure>
+
+<p>これでエイリスを設定しておくとターミナル操作しながらコマンドラインからさくっとつなげます。</p>
+<figure class="highlight"><figcaption><span>.zshrc</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">alias</span> vc=<span class="attribute">'scutil</span> <span class="comment">--nc start'</span></div><div class="line"><span class="keyword">alias</span> vd=<span class="attribute">'scutil</span> <span class="comment">--nc stop'</span></div></pre></td></tr></table></figure>
+
+
+<ul>
+<li>接続</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>vc [<span class="constant">VPN</span>サービス名]</div></pre></td></tr></table></figure>
+
+<ul>
+<li>切断</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>vd [<span class="constant">VPN</span>サービス名]</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:moritam.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Frontend/">Frontend</a><small>1</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/browser-sync/">browser-sync</a><small>1</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>1</small></li>
+  
+    <li><a href="/tags/terminal/">terminal</a><small>1</small></li>
+  
+    <li><a href="/tags/wercker/">wercker</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 Hayato Moritan
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
