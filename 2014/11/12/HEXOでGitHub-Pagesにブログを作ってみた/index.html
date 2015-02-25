@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HEXOでGitHub Pagesにブログを作ってみた | moritam.github.io</title>
+  <meta name="author" content="Hayato Moritan">
+  
+  <meta name="description" content="HEXO
+ブログ生成に特化したNode.js製の静的サイトジェネレータ。
+http://hexo.io/
+想像以上に簡単にブログを作成してGitHub Pagesにデプロイできることが判明。下記のページが参考になりました。
+所要時間3分!? Github PagesとHEXOで爆速ブログ構築してみよ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HEXOでGitHub Pagesにブログを作ってみた"/>
+  <meta property="og:site_name" content="moritam.github.io"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="moritam.github.io" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">moritam.github.io</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-12T17:25:25.000Z"><a href="/2014/11/12/HEXOでGitHub-Pagesにブログを作ってみた/">Nov 12 2014</a></time>
+      
+      
+  
+    <h1 class="title">HEXOでGitHub Pagesにブログを作ってみた</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="HEXO">HEXO</h2>
+<p>ブログ生成に特化したNode.js製の静的サイトジェネレータ。</p>
+<p><a href="http://hexo.io/" target="_blank" rel="external">http://hexo.io/</a></p>
+<p>想像以上に簡単にブログを作成してGitHub Pagesにデプロイできることが判明。<br>下記のページが参考になりました。</p>
+<p><a href="http://liginc.co.jp/web/programming/server/104594" target="_blank" rel="external">所要時間3分!? Github PagesとHEXOで爆速ブログ構築してみよう！</a></p>
+<ul>
+<li>Markdownで記事が書ける</li>
+<li>記事作成からデプロイまでコマンドライン上（iTerm）で作業が完結する</li>
+</ul>
+<p>コマンドラインやMarkdownに慣れたエンジニアなら非力な編集能力しかないブラウザの管理画面などで作成するより楽なので、エンジニア向けのブログ作成ツールと言えるかと思います。</p>
+<h2 id="インストール〜デプロイ">インストール〜デプロイ</h2>
+<p>GitHub Pageのリポジトリは既に作成済みという前提で…</p>
+<h3 id="1-_HEXOのインストール">1. HEXOのインストール</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>npm install -g hexo</div></pre></td></tr></table></figure>
+
+<h3 id="2-_新規プロジェクトの作成">2. 新規プロジェクトの作成</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo init myblog</div></pre></td></tr></table></figure>
+
+<h3 id="3-_必要なモジュールのインストール">3. 必要なモジュールのインストール</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>cd myblog</div><div class="line"><span class="variable">$ </span>npm install</div></pre></td></tr></table></figure>
+
+<h3 id="4-_新規ブログ作成（タイトルを指定）">4. 新規ブログ作成（タイトルを指定）</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo <span class="keyword">new</span> <span class="string">'HEXOでGithubPagesにブログを作ってみた'</span></div></pre></td></tr></table></figure>
+
+<h3 id="5-_記事作成（MarkDownで記述）">5. 記事作成（MarkDownで記述）</h3>
+<figure class="highlight"><figcaption><span>HEXOでGithubPagesにブログを作ってみた.md</span><a href="https://help.github.com/articles/github-flavored-markdown/" target="_blank" rel="external">GitHub Flavored Markdown</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">title: HEXOでGitHub Pagesにブログを作ってみた</div><div class="line">date: 2014-11-12 17:25:25</div><div class="line">categories: frontend</div><div class="line">tags:</div><div class="line"><span class="bullet">- </span>hexo</div><div class="line"><span class="bullet">- </span>wercker</div><div class="line"><span class="bullet">- </span>github</div><div class="line"><span class="bullet">- </span>browser-sync</div><div class="line"><span class="header">permalink: test.js</span></div><div class="line">---</div><div class="line"></div><div class="line"><span class="header">##HEXO</span></div><div class="line">ブログ生成に特化したNode.js製の静的サイトジェネレータ。</div><div class="line"></div><div class="line">[<span class="link_label">http://hexo.io/</span>](<span class="link_url">http://hexo.io/</span>)</div><div class="line"></div><div class="line">想像以上に簡単にブログを作成してGitHub Pagesにデプロイできることが判明。</div><div class="line">下記のページが参考になりました。</div><div class="line"></div><div class="line">[<span class="link_label">所要時間3分!? Github PagesとHEXOで爆速ブログ構築してみよう！</span>](<span class="link_url">http://liginc.co.jp/web/programming/server/104594</span>)</div><div class="line"></div><div class="line">・</div><div class="line">・</div><div class="line">・</div></pre></td></tr></table></figure>
+
+<h5 id="基本Markdown記法で書けるけど、一部（codeブロックのsourceやlanguageなど）Markdownで書いても出力されないものが。">基本Markdown記法で書けるけど、一部（codeブロックのsourceやlanguageなど）Markdownで書いても出力されないものが。</h5>
+<h5 id="一応別途HEXO記法なるものがありそちらで記述することもできるので、コードブロックなど一部の内容はHEXO記法で書くことに。">一応別途HEXO記法なるものがありそちらで記述することもできるので、コードブロックなど一部の内容はHEXO記法で書くことに。</h5>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">｛% codeblock <span class="attr_selector">[title]</span> <span class="attr_selector">[lang:language]</span> <span class="attr_selector">[url]</span> <span class="attr_selector">[link text]</span> %｝</div><div class="line"> <span class="attribute">content</span></div><div class="line">｛% endcodeblock %｝</div></pre></td></tr></table></figure>
+
+<p><a href="http://tech.admax.ninja/2014/09/11/how-to-write-article-in-hexo/" target="_blank" rel="external">【Hexo】Hexoにおける記事の書き方</a></p>
+<h3 id="6-_ブラウザで確認（ローカルサーバ起動）">6. ブラウザで確認（ローカルサーバ起動）</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo server</div></pre></td></tr></table></figure>
+
+<h3 id="7-_GitHub_Pagesにデプロイ">7. GitHub Pagesにデプロイ</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo deploy</div></pre></td></tr></table></figure>
+
+<p>以上。これだけでGitHubページ上にブログを作成・公開までできてしまいます。</p>
+<p><img src="/2014/11/12/HEXOでGitHub-Pagesにブログを作ってみた/moritam_github_io.jpg" alt="HEXOで作成したブログ http://moritam.github.io/"></p>
+<h2 id="その他試したこと">その他試したこと</h2>
+<h3 id="テーマの変更">テーマの変更</h3>
+<p>一応テーマも変えられる。何故か中国語対応（中国製？）のテーマが多い。<br>テーマを変更する場合は、<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="external">こちら</a>から好きなテーマを選び、githubリポジトリからcloneする。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$ </span>git clone <span class="symbol">https:</span>/<span class="regexp">/github/com</span><span class="regexp">/hijiangtao/dark</span>-tech.git themes/dark-tech</div></pre></td></tr></table></figure>
+
+<p>hexoの設定ファイルでテーマを変更</p>
+<figure class="highlight"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="preprocessor"># Extensions</span></div><div class="line"><span class="preprocessor">## Plugins: https://github.com/hexojs/hexo/wiki/Plugins</span></div><div class="line"><span class="preprocessor">## Themes: https://github.com/hexojs/hexo/wiki/Themes</span></div><div class="line">theme:  apollo</div><div class="line">exclude_generator:</div></pre></td></tr></table></figure>
+
+<p>既製テーマのスタイルを調整したい場合はインストールしたテーマ内の /source/css/ 以下の stylusファイル等を編集すればOK。<br>テーマによって異なるけどstylusやlessで作られているものが多いみたい。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">themes<span class="regexp">/strict/</span><span class="keyword">source</span><span class="regexp">/css/</span>partial<span class="regexp">/_post.styl</span></div></pre></td></tr></table></figure>
+
+<h3 id="更新時の自動リロード（livereload/browser-sync）">更新時の自動リロード（livereload/browser-sync）</h3>
+<p>やっぱり欲しかったので探してみた。<br>まずlivereloadを試したけれど、browser-syncがあったので結局そちらに落ち着く。起動ブラウザはchrome canaryに変更。<br><a href="https://www.npmjs.org/package/hexo-browser-sync" target="_blank" rel="external">npm hexo-browser-sync</a></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm <span class="keyword">i</span> hexo-browser-<span class="keyword">sync</span> --save</div></pre></td></tr></table></figure>
+
+<figure class="highlight"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">browser_sync:</div><div class="line">  port: <span class="number">3000</span></div><div class="line">  browser: <span class="string">"google chrome canary"</span></div><div class="line">  <span class="literal">open</span>: <span class="literal">true</span></div></pre></td></tr></table></figure>
+
+<h2 id="CI（wercker）との連携_〜_git_pushで自動デプロイ">CI（wercker）との連携 〜 git pushで自動デプロイ</h2>
+<p>werckerというCIツールと連携してGitHub Pagesへの自動デプロイができる。<br>一応試してみたけれど、テストフローなどを挟まないのであれば、hexo deployでGitHub Pagesにはデプロイ（push）できるのであまり大差ない？<br>本格的にCIを導入する場合は使えるかも。<br>それでも、何か hexo 側の設定ファイルの問題などがあると build や deploy でエラーとなり運用環境には反映されないので、手動で hexo deploy してしまうよりはよいのかもしれない。</p>
+<p>導入は以下の手順を参考に。</p>
+<p><a href="http://yuukichi.hatenablog.com/entry/2014/08/16/Hexo%2BGithub%2BWercker%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E6%A7%8B%E7%AF%89" target="_blank" rel="external">Hexo+Github+Werckerでブログ構築</a></p>
+<h2 id="その他やりたかったことなど">その他やりたかったことなど</h2>
+<p>例えばブログ以外の静的ページを追加したいのだけど、generate時にまとめて再生成される際、古いファイルやhexo管理外のファイルは削除されてしまう。<br>ので、GitHub Pagesのトップ（yourname.github.io）をhexoのブログページにすると、GitHub Pagesにhexoのブログ以外のページが作れない。<br>トップではなくサブディレクトリ切ってそっちをhexoのdeplpy先にするとかしないとダメかも。</p>
+<h2 id="参考リンク">参考リンク</h2>
+<ul>
+<li><p>所要時間3分!? Github PagesとHEXOで爆速ブログ構築してみよう！<br><a href="http://liginc.co.jp/web/programming/server/104594" target="_blank" rel="external">http://liginc.co.jp/web/programming/server/104594</a></p>
+</li>
+<li><p>Github Pages<br><a href="https://pages.github.com/" target="_blank" rel="external">https://pages.github.com/</a></p>
+</li>
+<li><p>hexo<br><a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">http://hexo.io/docs/deployment.html</a></p>
+</li>
+<li><p>hexo-browser-sync<br><a href="https://www.npmjs.org/package/hexo-browser-sync" target="_blank" rel="external">https://www.npmjs.org/package/hexo-browser-sync</a></p>
+</li>
+<li><p>Hexo+Github+Werckerでブログ構築<br><a href="http://yuukichi.hatenablog.com/entry/2014/08/16/Hexo%2BGithub%2BWercker%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E6%A7%8B%E7%AF%89" target="_blank" rel="external">http://yuukichi.hatenablog.com/entry/2014/08/16/</a></p>
+</li>
+<li><p>wercker<br><a href="http://wercker.com/" target="_blank" rel="external">http://wercker.com/</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/frontend/">frontend</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/hexo/">hexo</a>, <a href="/tags/wercker/">wercker</a>, <a href="/tags/github/">github</a>, <a href="/tags/browser-sync/">browser-sync</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://moritam.github.io/2014/11/12/HEXOでGitHub-Pagesにブログを作ってみた/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:moritam.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/backend/">backend</a><small>1</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>3</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/browser-sync/">browser-sync</a><small>2</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>2</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/node-js/">node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/shell/">shell</a><small>1</small></li>
+  
+    <li><a href="/tags/terminal/">terminal</a><small>1</small></li>
+  
+    <li><a href="/tags/vpn/">vpn</a><small>1</small></li>
+  
+    <li><a href="/tags/wercker/">wercker</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 Hayato Moritan
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript" src="//typesquare.com/accessor/script/typesquare.js?gEwJEhbXQRQ%3D&fadein=10" charset="utf-8"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

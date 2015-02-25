@@ -1,0 +1,265 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gulp | moritam.github.io</title>
+  <meta name="author" content="Hayato Moritan">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="moritam.github.io"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="moritam.github.io" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">moritam.github.io</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title tag">gulp</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-04T15:31:04.000Z"><a href="/2015/02/04/BrowserSyncのコマンドラインモード/">Feb 4 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/04/BrowserSyncのコマンドラインモード/">BrowserSyncのコマンドラインモード</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>BrowserSyncはGulp経由せずコマンドラインで直接起動することもできます。<br>他に自動化したいタスクがまだない場合や、さくっとローカルサーバで確認したい場合など、<code>Gulpfile</code>書くのが面倒な時はコマンドラインで直接起動できます。</p>
+<blockquote>
+<p><a href="http://www.browsersync.io/docs/command-line/" target="_blank" rel="external">BrowserSync Command Line Usage</a></p>
+</blockquote>
+<h2 id="前提">前提</h2>
+<ul>
+<li>node.jsのインストール</li>
+<li>BrowserSyncのインストール</li>
+</ul>
+<blockquote>
+<p><a href="http://www.browsersync.io/#install" target="_blank" rel="external">http://www.browsersync.io/#install</a></p>
+</blockquote>
+<h2 id="起動">起動</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser-sync start --server --files=<span class="string">"./**/*.html,./**/*.css,./**/*.js"</span></div></pre></td></tr></table></figure>
+
+<p>watchも自動で走るのでLiveReloadとしても勿論使えます。（<code>--files</code>にwatch対象を指定）</p>
+<p><strong><em>※対象ファイルが多すぎるとCPUを圧迫するので注意!</em></strong></p>
+<blockquote>
+<p><a href="http://qiita.com/moritam@github/items/" target="_blank" rel="external">gulp watchでCPU使用率100超</a></p>
+</blockquote>
+<p>phpなど動的なページの確認も<code>--proxy</code> オプションを使うことで可能です。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser-sync start --proxy <span class="string">"myproject.dev"</span> --files <span class="string">"css/*.css"</span></div></pre></td></tr></table></figure>
+
+<p>これまでローカル環境での確認は</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m SimpleHTTPServer <span class="number">8080</span></div></pre></td></tr></table></figure>
+
+<p>や、php使っているページなら</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -S localhost:<span class="number">8080</span></div></pre></td></tr></table></figure>
+
+<p>を使っていましたが、<code>browser-sync</code>一本になりそう。<br>最近は apache で見る機会が減りました。（VirtualHost書くの面倒…）</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-28T19:22:45.000Z"><a href="/2014/11/28/gulp-watchでCPU使用率100超/">Nov 28 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/11/28/gulp-watchでCPU使用率100超/">gulp.watchでCPU使用率100超</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="gulp_watchでCPU使用率100超">gulp watchでCPU使用率100超</h2>
+<p><code>browser-sync</code>を使ってLiveReloadをしていたところ、<code>node</code>プロセスのCPU使用率が異常に高く(100%超)なっていた。</p>
+<p>※topで確認したところ</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/15980/f9923865-4df8-b3bb-a010-1820d813d5e4.jpeg" alt="top.jpg" title="top.jpg"></p>
+<p>最初は<code>browser-sync</code>の問題？と思ったけど、よくよく見るとCPUを使っている犯人は<code>watch</code>の方でした。<br>なんてことはない、<code>watch</code>の対象範囲が拡すぎるだけで、それはそうだよな、という話。</p>
+<ul>
+<li>修正前</li>
+</ul>
+<figure class="highlight gulpfile.js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'browser-sync'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    gulp.watch([<span class="string">"./**/*"</span>], [<span class="string">'bs-reload'</span>]);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>のようにgulpfileの設定でwatch対象がルート以下全ファイルに。。<br>htmlもcssもjsも全て監視するのだからと、安易に全対象にしてしまうと、watchがきつくなります。（当然）</p>
+<ul>
+<li>修正後</li>
+</ul>
+<figure class="highlight gulpfile.js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'browser-sync'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    gulp.watch([<span class="string">"./**/*.html"</span>, <span class="string">"./**/*.css"</span>, <span class="string">"./**/*.js"</span>], [<span class="string">'bs-reload'</span>]);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h2 id="watch_interval">watch interval</h2>
+<p>また、この問題で解決策探っていた時に見つけた情報ですが、<code>gulp.watch</code>のオプションに<code>interval</code><br>というオプションがあり、対象ファイルが多いときはこのintervalを指定することでCPU負荷を下げられるとのこと。</p>
+<ul>
+<li>intervalオプション</li>
+</ul>
+<figure class="highlight gulpfile.js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'browser-sync'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    gulp.watch([<span class="string">"./**/*.html"</span>, <span class="string">"./**/*.css"</span>, <span class="string">"./**/*.js"</span>], {interval: <span class="number">500</span>} ,[<span class="string">'bs-reload'</span>]);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/gulpjs/gulp/issues/634" target="_blank" rel="external">constant CPU usage on watch #634　(GitHub)</a></p>
+<p>問題から少し外れますが、gulpのwatch自体CPU消費が大きい点は問題として認識されているようで、現在対応中とのことのよう。</p>
+<blockquote>
+<p>I’m merging all file watching related issues into one issue, since there is one solution. The next version of gaze is under development and we are waiting for it to come out before we can fix the following issues:</p>
+<ul>
+<li>high cpu usage</li>
+<li>doesnt catch new files</li>
+<li>globs get matched even though it was a file change that shouldn’t match it</li>
+<li>new files arent watched<br>stops on error (unrelated to gaze, but fixed already in gulp 4)</li>
+</ul>
+</blockquote>
+<p><a href="https://github.com/gulpjs/gulp/issues/651" target="_blank" rel="external">file watcher has problems #651 (GitHub)</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:moritam.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/backend/">backend</a><small>1</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>3</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/browser-sync/">browser-sync</a><small>2</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>2</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/node-js/">node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/shell/">shell</a><small>1</small></li>
+  
+    <li><a href="/tags/terminal/">terminal</a><small>1</small></li>
+  
+    <li><a href="/tags/vpn/">vpn</a><small>1</small></li>
+  
+    <li><a href="/tags/wercker/">wercker</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 Hayato Moritan
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript" src="//typesquare.com/accessor/script/typesquare.js?gEwJEhbXQRQ%3D&fadein=10" charset="utf-8"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

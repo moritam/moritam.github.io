@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archives: 2015 | moritam.github.io</title>
+  <meta name="author" content="Hayato Moritan">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="moritam.github.io"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="moritam.github.io" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">moritam.github.io</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title">2015</h2>
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-04T15:31:04.000Z"><a href="/2015/02/04/BrowserSyncのコマンドラインモード/">Feb 4 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/04/BrowserSyncのコマンドラインモード/">BrowserSyncのコマンドラインモード</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>BrowserSyncはGulp経由せずコマンドラインで直接起動することもできます。<br>他に自動化したいタスクがまだない場合や、さくっとローカルサーバで確認したい場合など、<code>Gulpfile</code>書くのが面倒な時はコマンドラインで直接起動できます。</p>
+<blockquote>
+<p><a href="http://www.browsersync.io/docs/command-line/" target="_blank" rel="external">BrowserSync Command Line Usage</a></p>
+</blockquote>
+<h2 id="前提">前提</h2>
+<ul>
+<li>node.jsのインストール</li>
+<li>BrowserSyncのインストール</li>
+</ul>
+<blockquote>
+<p><a href="http://www.browsersync.io/#install" target="_blank" rel="external">http://www.browsersync.io/#install</a></p>
+</blockquote>
+<h2 id="起動">起動</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser-sync start --server --files=<span class="string">"./**/*.html,./**/*.css,./**/*.js"</span></div></pre></td></tr></table></figure>
+
+<p>watchも自動で走るのでLiveReloadとしても勿論使えます。（<code>--files</code>にwatch対象を指定）</p>
+<p><strong><em>※対象ファイルが多すぎるとCPUを圧迫するので注意!</em></strong></p>
+<blockquote>
+<p><a href="http://qiita.com/moritam@github/items/" target="_blank" rel="external">gulp watchでCPU使用率100超</a></p>
+</blockquote>
+<p>phpなど動的なページの確認も<code>--proxy</code> オプションを使うことで可能です。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">browser-sync start --proxy <span class="string">"myproject.dev"</span> --files <span class="string">"css/*.css"</span></div></pre></td></tr></table></figure>
+
+<p>これまでローカル環境での確認は</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">python -m SimpleHTTPServer <span class="number">8080</span></div></pre></td></tr></table></figure>
+
+<p>や、php使っているページなら</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php -S localhost:<span class="number">8080</span></div></pre></td></tr></table></figure>
+
+<p>を使っていましたが、<code>browser-sync</code>一本になりそう。<br>最近は apache で見る機会が減りました。（VirtualHost書くの面倒…）</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+    <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-04T14:37:59.000Z"><a href="/2015/02/04/シェルスクリプトでMySQLにCSVデータをインポート/">Feb 4 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/04/シェルスクリプトでMySQLにCSVデータをインポート/">シェルスクリプトでMySQLにCSVデータをインポート</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><em><strong>※郵政の郵便番号CSVデータに他にも落とし穴があることが判明したため最終的には全く違う処理（tmpテーブル作るなど）にしましたがLOAD DATA INFILEの仕様例として</strong></em></p>
+<blockquote>
+<p><a href="http://www.f3.dion.ne.jp/~element/msaccess/AcTipsKenAllCsv.html" target="_blank" rel="external">郵便番号データの落とし穴</a></p>
+</blockquote>
+<h3 id="やりたいこと">やりたいこと</h3>
+<ul>
+<li>CSVファイルの任意の項目をMySQLのテーブルの任意の項目へインポートしたい</li>
+<li>更新日時にはインポート時のtimestampを入れたい</li>
+<li>CSVデータの条件によってはNULLを入れたい（例外的なデータなど）</li>
+<li>CSVファイルの文字コードはSJIS</li>
+<li>スクリプト化</li>
+</ul>
+<p>つまりは日本郵政の郵便番号CSVデータをインポートしたい時などです。</p>
+<blockquote>
+<p>日本郵政 郵便番号データ<br><a href="http://www.post.japanpost.jp/zipcode/dl/oogaki-zip.html" target="_blank" rel="external">http://www.post.japanpost.jp/zipcode/dl/oogaki-zip.html</a></p>
+</blockquote>
+<h2 id="LOAD_DATA_INFILE">LOAD DATA INFILE</h2>
+<p>LOAD DATA INFILEを使います。</p>
+<h3 id="LOAD_DATA_INFILE構文">LOAD DATA INFILE構文</h3>
+<figure class="highlight sql:sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> [<span class="keyword">LOW_PRIORITY</span> | <span class="keyword">CONCURRENT</span>] [<span class="keyword">LOCAL</span>]</span></div><div class="line"><span class="keyword">INFILE</span> <span class="string">'ファイル名'</span></div><div class="line">    [<span class="keyword">REPLACE</span> | <span class="keyword">IGNORE</span>]</div><div class="line">    <span class="keyword">INTO</span> <span class="keyword">TABLE</span> テーブル名</div><div class="line">    [<span class="keyword">FIELDS</span></div><div class="line">        [<span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'区切り文字'</span>]</div><div class="line">        [[<span class="keyword">OPTIONALLY</span>] <span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'フィールドを囲むキャラクタ'</span>]</div><div class="line">        [<span class="keyword">ESCAPED</span> <span class="keyword">BY</span> <span class="string">'エスケープシーケンス'</span> ]</div><div class="line">    ]</div><div class="line">    [<span class="keyword">LINES</span> <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\n'</span>]</div><div class="line">    [<span class="keyword">IGNORE</span> 数値 <span class="keyword">LINES</span>]</div><div class="line">    [(フィールド名, ...)]</div></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="http://rfs.jp/sb/sql/s03/08-6.html" target="_blank" rel="external">http://rfs.jp/sb/sql/s03/08-6.html</a></p>
+</blockquote>
+<h3 id="実行例サンプル">実行例サンプル</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">SET</span> character_set_database=sjis;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">TRUNCATE</span> zips;</span></div><div class="line"></div><div class="line"><span class="operator"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> <span class="keyword">INFILE</span> <span class="string">"${CSVPATH}"</span></span></div><div class="line"><span class="keyword">INTO</span> <span class="keyword">TABLE</span> zips</div><div class="line"><span class="keyword">FIELDS</span></div><div class="line">  <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">','</span></div><div class="line">  <span class="keyword">OPTIONALLY</span> <span class="keyword">ENCLOSED</span> <span class="keyword">BY</span> <span class="string">'"'</span></div><div class="line"><span class="keyword">LINES</span></div><div class="line">  <span class="keyword">TERMINATED</span> <span class="keyword">BY</span> <span class="string">'\r\n'</span></div><div class="line"><span class="keyword">IGNORE</span> <span class="number">0</span> <span class="keyword">LINES</span></div><div class="line">  (@fieldA, @fieldB, @fieldC, @fieldD, @fieldE, @fieldF, @fieldG, @fieldH, @fieldI)</div><div class="line"><span class="keyword">SET</span></div><div class="line">  code=@fieldC,</div><div class="line">  prefecture=<span class="keyword">trim</span>(@fieldG),</div><div class="line">  address1=<span class="keyword">trim</span>(@fieldH),</div><div class="line">  address2=<span class="keyword">CASE</span> <span class="keyword">right</span>(@fieldC, <span class="number">2</span>) <span class="keyword">WHEN</span> <span class="string">'00'</span> <span class="keyword">THEN</span> <span class="literal">NULL</span> <span class="keyword">ELSE</span> <span class="keyword">trim</span>(@fieldI) <span class="keyword">END</span>,</div><div class="line">  created_at=<span class="keyword">now</span>(),</div><div class="line">  updated_at=<span class="keyword">now</span>();</div><div class="line">EOF</div></pre></td></tr></table></figure>
+
+<h2 id="ポイント">ポイント</h2>
+<ul>
+<li>CSVがSJIS（mysqlはutf8）の場合は文字コードをSJISに設定</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">SET</span> character_set_database=sjis;</span></div></pre></td></tr></table></figure>
+
+<ul>
+<li>CSVの改行コードがCR+LFの場合は、<code>LINES TERMINATED BY</code> に’\r\n’を指定</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LINES</div><div class="line">  TERMINATED BY '\r\n'</div></pre></td></tr></table></figure>
+
+<p> Windows環境で作成されたCSVファイルのインポートには基本指定必須のようです</p>
+<blockquote>
+<p><a href="http://www.infoscoop.org/blogjp/2014/07/23/about-load-data-infile/" target="_blank" rel="external">http://www.infoscoop.org/blogjp/2014/07/23/about-load-data-infile/</a></p>
+</blockquote>
+<ul>
+<li>CSVファイルの任意の項目をMySQLの任意のカラムにインポート</li>
+</ul>
+<figure class="highlight sql:sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">  (<span class="variable">@fieldA</span>, <span class="variable">@fieldB</span>, <span class="variable">@fieldC</span>, <span class="variable">@fieldD</span>, <span class="variable">@fieldE</span>, <span class="variable">@fieldF</span>, <span class="variable">@fieldG</span>, <span class="variable">@fieldH</span>, <span class="variable">@fieldI</span>)</div><div class="line"><span class="constant">SET</span></div><div class="line">  code=<span class="variable">@fieldC</span>,</div><div class="line">  prefecture=<span class="variable">@fieldG</span>,</div><div class="line">  address1=<span class="variable">@fieldH</span>,</div><div class="line">  address2=<span class="constant">CASE</span> <span class="variable">@fieldI</span> <span class="constant">WHEN</span> <span class="string">"以下に掲載がない場合"</span> <span class="constant">THEN</span> <span class="constant">NULL</span> <span class="constant">ELSE</span> <span class="variable">@fieldI</span> <span class="constant">END</span>,</div><div class="line">  created_at=now(),</div><div class="line">  updated_at=now();</div></pre></td></tr></table></figure>
+
+<ol>
+<li>CSVの必要項目を左から取得して変数（@fieldA〜@fieldI）にセット</li>
+<li>mysql側の任意の項目に任意の値（@fieldA〜@fieldI）にセット</li>
+</ol>
+<ul>
+<li>条件によってはNULL（任意のデータ）を入れたい</li>
+</ul>
+<p>日本郵政のCSVデータは、郵便番号の下一桁が’00’の郵便番号の市区町村のデータが<br>困ったことに”以下に掲載がない場合”という文字列データになっている。<br>（プログラムでインポートする前提のデータだろうに、なぜこんな。。。）</p>
+<p>このデータだけはそのまま入れたくないので、その場合だけNULLをセットします。ここはSQLがそのまま使えるのでCASE式を使用。同様にして更新日時には<code>now()</code>をセット。</p>
+<figure class="highlight sql:sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">address2=</div><div class="line">  <span class="keyword">CASE</span> @fieldI</div><div class="line">    WHEN <span class="string">"以下に掲載がない場合"</span></div><div class="line">    <span class="keyword">THEN</span> <span class="literal">NULL</span></div><div class="line">    <span class="keyword">ELSE</span> @fieldI</div><div class="line">  <span class="keyword">END</span>,</div><div class="line">  created_at=<span class="built_in">now</span>(),</div><div class="line">  updated_at=<span class="built_in">now</span>();</div></pre></td></tr></table></figure>
+
+<ul>
+<li>MySQLサーバではなくMySQLクライアントでファイルを読む</li>
+</ul>
+<figure class="highlight sql:sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> <span class="keyword">INFILE</span> <span class="string">"./data/KEN_ALL.CSV"</span></span></div></pre></td></tr></table></figure>
+
+<p><code>LOAD DATA INFILE</code>のままでは下記のようなパーミッションエラーになる。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ERROR</span> <span class="number">13</span> (HY000): Can<span class="comment">'t get stat of '指定ファイルの絶対パス' (Errcode: 2)</span></div></pre></td></tr></table></figure>
+
+<p><code>LOAD DATA INFILE</code> がmysqlサーバ側でファイルを読み込むため、mysqlユーザーでファイルにアクセスしようとしてエラーになる模様。<br><code>LOAD DATA LOCAL INFILE</code> でmysqlクライアント側にファイルを読み込ませることができるらしい。</p>
+<blockquote>
+<p><a href="http://d.hatena.ne.jp/tachikawa844/20090216/" target="_blank" rel="external">http://d.hatena.ne.jp/tachikawa844/20090216/</a></p>
+</blockquote>
+<h2 id="シェルスクリプト化">シェルスクリプト化</h2>
+<p>ヒアドキュメントで一括SQL実行という方法がありました。</p>
+<blockquote>
+<p><a href="http://dqn.sakusakutto.jp/2011/08/mysql_shellscript.html" target="_blank" rel="external">http://dqn.sakusakutto.jp/2011/08/mysql_shellscript.html</a></p>
+</blockquote>
+<figure class="highlight shell:shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="shebang">#!/bin/sh</span></div><div class="line"></div><div class="line"><span class="comment"># ユーザー名/データベースが未指定の場合終了</span></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$#</span> <span class="operator">-lt</span> <span class="number">2</span> ]</div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"Usage: import_ken_all.sh [username] [database] [filepath]"</span></div><div class="line">    <span class="keyword">exit</span> <span class="number">1</span></div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line">DIR=$(<span class="built_in">cd</span> $(dirname <span class="variable">$0</span>); <span class="built_in">pwd</span>)</div><div class="line">DBUSER=<span class="variable">$1</span></div><div class="line">PASS=<span class="string">""</span></div><div class="line">DBNAME=<span class="variable">$2</span></div><div class="line">CSVPATH=<span class="variable">$3</span></div><div class="line"></div><div class="line"><span class="comment"># MySQLをバッチモードで実行</span></div><div class="line">CMD_MYSQL=<span class="string">"mysql -u<span class="variable">${DBUSER}</span> -p <span class="variable">${DBNAME}</span>"</span></div><div class="line"></div><div class="line"><span class="comment"># ヒアドキュメントでSQL文を一括で実行</span></div><div class="line"><span class="comment">#   1. SJISデータの取込用に文字コードを設定</span></div><div class="line"><span class="comment">#   2. zipsテーブルのクリア</span></div><div class="line"><span class="comment">#   3. CSVから必要な項目をインポート（郵政データCSVの住所2が"以下に掲載がない場合"の場合はNULLをセット）</span></div><div class="line"><span class="variable">$CMD_MYSQL</span> &lt;&lt;EOF</div><div class="line">SET character_<span class="keyword">set</span>_database=sjis;</div><div class="line"></div><div class="line">TRUNCATE zips;</div><div class="line"></div><div class="line">LOAD DATA LOCAL INFILE <span class="string">"<span class="variable">${CSVPATH}</span>"</span></div><div class="line">INTO TABLE zips</div><div class="line">FIELDS</div><div class="line">  TERMINATED BY <span class="string">','</span></div><div class="line">  OPTIONALLY ENCLOSED BY <span class="string">'"'</span></div><div class="line">LINES</div><div class="line">  TERMINATED BY <span class="string">'\r\n'</span></div><div class="line">IGNORE <span class="number">0</span> LINES</div><div class="line">  (@fieldA, @fieldB, @fieldC, @fieldD, @fieldE, @fieldF, @fieldG, @fieldH, @fieldI)</div><div class="line">SET</div><div class="line">  code=@fieldC,</div><div class="line">  prefecture=trim(@fieldG),</div><div class="line">  address1=trim(@fieldH),</div><div class="line">  address2=CASE right(@fieldC, <span class="number">2</span>) WHEN <span class="string">'00'</span> THEN NULL ELSE trim(@fieldI) END,</div><div class="line">  created_at=now(),</div><div class="line">  updated_at=now();</div><div class="line">EOF</div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  
+
+  <nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:moritam.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/backend/">backend</a><small>1</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>3</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/browser-sync/">browser-sync</a><small>2</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>2</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/node-js/">node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/shell/">shell</a><small>1</small></li>
+  
+    <li><a href="/tags/terminal/">terminal</a><small>1</small></li>
+  
+    <li><a href="/tags/vpn/">vpn</a><small>1</small></li>
+  
+    <li><a href="/tags/wercker/">wercker</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 Hayato Moritan
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript" src="//typesquare.com/accessor/script/typesquare.js?gEwJEhbXQRQ%3D&fadein=10" charset="utf-8"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
