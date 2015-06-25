@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gulp.watchでCPU使用率100超 | moritam.github.io</title>
+  <meta name="author" content="Hayato Moritan">
+  
+  <meta name="description" content="gulp watchでCPU使用率100超
+browser-syncを使ってLiveReloadをしていたところ、nodeプロセスのCPU使用率が異常に高く(100%超)なっていた。
+※topで確認したところ
+
+最初はbrowser-syncの問題？と思ったけど、よくよく見るとCPUを使っている犯人">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="gulp.watchでCPU使用率100超"/>
+  <meta property="og:site_name" content="moritam.github.io"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="moritam.github.io" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">moritam.github.io</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-11-28T19:22:45.000Z"><a href="/2014/11/28/gulp-watchでCPU使用率100超/">Nov 28 2014</a></time>
+      
+      
+  
+    <h1 class="title">gulp.watchでCPU使用率100超</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="gulp_watchでCPU使用率100超">gulp watchでCPU使用率100超</h2>
+<p><code>browser-sync</code>を使ってLiveReloadをしていたところ、<code>node</code>プロセスのCPU使用率が異常に高く(100%超)なっていた。</p>
+<p>※topで確認したところ</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/15980/f9923865-4df8-b3bb-a010-1820d813d5e4.jpeg" alt="top.jpg" title="top.jpg"></p>
+<p>最初は<code>browser-sync</code>の問題？と思ったけど、よくよく見るとCPUを使っている犯人は<code>watch</code>の方でした。<br>なんてことはない、<code>watch</code>の対象範囲が拡すぎるだけで、それはそうだよな、という話。</p>
+<ul>
+<li>修正前</li>
+</ul>
+<figure class="highlight gulpfile.js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'browser-sync'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    gulp.watch([<span class="string">"./**/*"</span>], [<span class="string">'bs-reload'</span>]);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>のようにgulpfileの設定でwatch対象がルート以下全ファイルに。。<br>htmlもcssもjsも全て監視するのだからと、安易に全対象にしてしまうと、watchがきつくなります。（当然）</p>
+<ul>
+<li>修正後</li>
+</ul>
+<figure class="highlight gulpfile.js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'browser-sync'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    gulp.watch([<span class="string">"./**/*.html"</span>, <span class="string">"./**/*.css"</span>, <span class="string">"./**/*.js"</span>], [<span class="string">'bs-reload'</span>]);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h2 id="watch_interval">watch interval</h2>
+<p>また、この問題で解決策探っていた時に見つけた情報ですが、<code>gulp.watch</code>のオプションに<code>interval</code><br>というオプションがあり、対象ファイルが多いときはこのintervalを指定することでCPU負荷を下げられるとのこと。</p>
+<ul>
+<li>intervalオプション</li>
+</ul>
+<figure class="highlight gulpfile.js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'browser-sync'</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    gulp.watch([<span class="string">"./**/*.html"</span>, <span class="string">"./**/*.css"</span>, <span class="string">"./**/*.js"</span>], {interval: <span class="number">500</span>} ,[<span class="string">'bs-reload'</span>]);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/gulpjs/gulp/issues/634" target="_blank" rel="external">constant CPU usage on watch #634　(GitHub)</a></p>
+<p>問題から少し外れますが、gulpのwatch自体CPU消費が大きい点は問題として認識されているようで、現在対応中とのことのよう。</p>
+<blockquote>
+<p>I’m merging all file watching related issues into one issue, since there is one solution. The next version of gaze is under development and we are waiting for it to come out before we can fix the following issues:</p>
+<ul>
+<li>high cpu usage</li>
+<li>doesnt catch new files</li>
+<li>globs get matched even though it was a file change that shouldn’t match it</li>
+<li>new files arent watched<br>stops on error (unrelated to gaze, but fixed already in gulp 4)</li>
+</ul>
+</blockquote>
+<p><a href="https://github.com/gulpjs/gulp/issues/651" target="_blank" rel="external">file watcher has problems #651 (GitHub)</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/frontend/">frontend</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/gulp/">gulp</a>, <a href="/tags/node-js/">node.js</a>, <a href="/tags/browser-sync/">browser-sync</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://moritam.github.io/2014/11/28/gulp-watchでCPU使用率100超/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:moritam.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/backend/">backend</a><small>1</small></li>
+  
+    <li><a href="/categories/frontend/">frontend</a><small>3</small></li>
+  
+    <li><a href="/categories/mac/">mac</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/browser-sync/">browser-sync</a><small>2</small></li>
+  
+    <li><a href="/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tags/gulp/">gulp</a><small>2</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>1</small></li>
+  
+    <li><a href="/tags/mysql/">mysql</a><small>1</small></li>
+  
+    <li><a href="/tags/node-js/">node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/shell/">shell</a><small>1</small></li>
+  
+    <li><a href="/tags/terminal/">terminal</a><small>1</small></li>
+  
+    <li><a href="/tags/vpn/">vpn</a><small>1</small></li>
+  
+    <li><a href="/tags/wercker/">wercker</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 Hayato Moritan
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script type="text/javascript" src="//typesquare.com/accessor/script/typesquare.js?gEwJEhbXQRQ%3D&fadein=10" charset="utf-8"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
